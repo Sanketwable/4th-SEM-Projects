@@ -28,13 +28,13 @@ class Detector(api_pb2_grpc.DetectorServicer):
             gray = cv2.cvtColor(frame , cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray , scaleFactor=1.5 , minNeighbors=5)
             if len(faces) > 1:
-                xi = -1000
-                yi = -1000
+                xi = -10000
+                yi = -10000
                 print(len(faces))
                 for ( x , y , w , h) in faces:
                     print(abs(x-xi)/w)
-                    if abs(x-xi)/w < 4:
-                        yield api_pb2.DetectorResponse(x=x ,y=y,w=w,h=10000)
+                    if abs(x-xi)/w < 4 and abs(x-xi)/w > 1:
+                        yield api_pb2.DetectorResponse(x=x ,y=y,w=w,h=h)
                         time.sleep(4)
                     xi=x
                     yi=y
