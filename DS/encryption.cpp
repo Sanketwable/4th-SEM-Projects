@@ -55,7 +55,6 @@ class Graph {
     vector< pair<int, pair<int, int> > > edges;
 
    public:
-  // Initialize the matrix to zero
   Graph(int numVertices) {
     this->numVertices = numVertices;
     adjMatrix = new int*[numVertices];
@@ -66,20 +65,17 @@ class Graph {
     }
   }
 
-  // Add edges
   void addEdge(int i, int j, int w) {
     adjMatrix[i][j] = w;
     adjMatrix[j][i] = w;
     edges.push_back(make_pair(w, make_pair(i,j)));
   }
 
-  // Remove edges
   void removeEdge(int i, int j) {
     adjMatrix[i][j] = 0;
     adjMatrix[j][i] = 0;
   }
 
-  // Print the martix
   int **GetAdjMatrix() {
     return adjMatrix;
   }
@@ -163,31 +159,23 @@ int main() {
     }
 
     int **adjMatrix2 = g2.GetAdjMatrix();
-
-
     int M2[str.length()+1][str.length()+1];
+    int M3[str.length()+1][str.length()+1];
+    int C[str.length()+1][str.length()+1];
 
     for (int i=0;i<str.length()+1;i++) {
         for (int j=0;j<str.length()+1;j++) {
           M2[i][j] = adjMatrix2[i][j];
         }
     }
-
     for (int i=0;i<str.length()+1;i++) {
         M2[i][i] = i;
     }
-
-    int M3[str.length()+1][str.length()+1];
-
     multiply(*M1, *M2, *M3, int(str.length()+1));
-
-    int C[str.length()+1][str.length()+1];
-
     multiply(*key, *M3, *C, int(str.length()+1));
-
-
     cout<<"\nUse Key, CipherText and M1 Matrices for Decryption "<<endl;
     cout<<"\nKey:\n";
+    
     for (int i=0;i<str.length()+1;i++) {
         for (int j=0;j<str.length()+1;j++) {
             cout<<key[i][j]<<"\t";
@@ -208,7 +196,4 @@ int main() {
         }
         cout<<endl;
     }
-
-
-
 }

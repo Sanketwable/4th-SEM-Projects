@@ -158,6 +158,7 @@ int main() {
     int prev = 0; 
     char ltr = 'a';
     char ltrnow;
+    cout<<"The Encrypted word is :"<<endl;
     for (auto itr = v.begin()+1; itr != v.end(); itr++) {
        
         ltrnow = char(int(ltr) + M1[prev][*itr]);
